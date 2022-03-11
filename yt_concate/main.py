@@ -1,26 +1,33 @@
-from yt_concate.pipeline.Steps.get_video_list import GetVideoList
-from yt_concate.pipeline.Steps.download_caption import DownloadCaption
-from yt_concate.pipeline.Steps.Step import StepException
+from yt_concate.pipeline.steps.preflight import PreFlight
+from yt_concate.pipeline.steps.get_video_list import GetVideoList
+from yt_concate.pipeline.steps.initialize import InitializeYT
+from yt_concate.pipeline.steps.download_caption import DownloadCaption
+from yt_concate.pipeline.steps.read_caption import ReadCaption
+from yt_concate.pipeline.steps.search import Search
+from yt_concate.pipeline.steps.download_videos import DownloadVideos
+from yt_concate.pipeline.steps.postflight import PostFlight
 from yt_concate.pipeline.pipeline import Pipeline
-from yt_concate.pipeline.Steps.read_caption import ReadCaption
-from yt_concate.pipeline.Steps.preflight import PreFlight
-from yt_concate.pipeline.Steps.postflight import PostFlight
 from utils import Utils
+from yt_concate.pipeline.steps.step import StepException
 
-CHANNEL_ID = 'UCoSrY_IQQVpmIRZ9Xf-y93g'
+CHANNEL_ID = 'UCphTF9wHwhCt-BzIq-s4V-g'
 
 
 def main():
     inputs = {
-        'channel_id': CHANNEL_ID
+        'channel_id': CHANNEL_ID,
+        'search_word': 'Earth',
 
     }
 
     steps = [
         PreFlight(),
         GetVideoList(),
+        InitializeYT(),
         DownloadCaption(),
         ReadCaption(),
+        Search(),
+        DownloadVideos(),
         PostFlight(),
     ]
     utils = Utils()
