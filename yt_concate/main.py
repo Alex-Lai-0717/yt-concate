@@ -5,6 +5,7 @@ from yt_concate.pipeline.steps.download_caption import DownloadCaption
 from yt_concate.pipeline.steps.read_caption import ReadCaption
 from yt_concate.pipeline.steps.search import Search
 from yt_concate.pipeline.steps.download_videos import DownloadVideos
+from yt_concate.pipeline.steps.edit_video import EditVideo
 from yt_concate.pipeline.steps.postflight import PostFlight
 from yt_concate.pipeline.pipeline import Pipeline
 from utils import Utils
@@ -17,6 +18,7 @@ def main():
     inputs = {
         'channel_id': CHANNEL_ID,
         'search_word': 'Earth',
+        'limit': 20,
 
     }
 
@@ -28,6 +30,7 @@ def main():
         ReadCaption(),
         Search(),
         DownloadVideos(),
+        EditVideo(),
         PostFlight(),
     ]
     utils = Utils()
